@@ -7,7 +7,7 @@ import { ChartData, ChartType, Color } from 'chart.js';
 })
 export class CustomBarChartComponent implements OnInit {
   // Doughnut
-  @Input() titulo = 'Sin titulo';
+  @Input('title') titulo = 'Sin titulo';
   constructor(){
 
   }
