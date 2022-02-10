@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomBarChartComponent } from './custom-bar-chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -12,7 +13,8 @@ import { CustomBarChartComponent } from './custom-bar-chart.component';
     CustomBarChartComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgChartsModule
   ]
 })
 export class CustomBarChartModule { }
