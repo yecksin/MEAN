@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RxjsComponent } from './rxjs.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    RxjsComponent
+  ],
+  exports: [
+    RxjsComponent
+  ],
   imports: [
     CommonModule
   ]
