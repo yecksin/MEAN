@@ -35,7 +35,7 @@ export class RxjsComponent implements OnInit {
 
 
     this.retornaIntervalo$ = this.retornaIntervalo().subscribe(resp=>{
-        console.log(resp)
+        // console.log(resp)
       })
 
 
