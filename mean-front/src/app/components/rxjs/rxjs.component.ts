@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 
 @Component({
   selector: 'app-rxjs',
@@ -12,8 +12,36 @@ export class RxjsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+
+     this.retornaObervable().pipe(
+      //retry(1) //? si hay un error repide la ejecucion una vez mas, re intentar
+    ).subscribe(
+      resp=>{
+        console.log(resp)
+        this.index = resp;
+      },
+      err=>{
+        console.log(err)
+        this.error = err;
+      },
+      ()=> console.info("terminado")
+
+    )
+
+
+
+
+
+
+
+  }
+
+
+  retornaObervable():Observable<number>{
     let random = Math.floor(Math.random() * (10 - 1)) + 1;
-    let obs$ = new Observable(observer=>{
+    //? es opcional poner el tipo de dato que tetorna
+    return new Observable<number>(observer=>{
       let i = -1
       setInterval(() => {
         i++
@@ -27,20 +55,6 @@ export class RxjsComponent implements OnInit {
       }, 500);
 
     })
-
-    obs$.subscribe(
-      resp=>{
-        console.log(resp)
-        this.index = resp;
-      },
-      err=>{
-        console.log(err)
-        this.error = err;
-      },
-      ()=> console.info("terminado")
-
-    )
-
   }
 
 }
