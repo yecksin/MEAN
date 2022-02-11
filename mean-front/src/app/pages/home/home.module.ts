@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { CustomBarChartModule } from '../../components/custom-bar-chart/custom-bar-chart.module';
 import { ThemeSelectorModule } from '../../components/theme-selector/theme-selector.module';
+import { PromesasModule } from '../../components/promesas/promesas.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ThemeSelectorModule } from '../../components/theme-selector/theme-selec
     CommonModule,
     HomeRoutingModule,
     CustomBarChartModule,
-    ThemeSelectorModule
+    ThemeSelectorModule,
+    PromesasModule
   ]
 })
 export class HomeModule { }
