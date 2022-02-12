@@ -1,6 +1,11 @@
 var express = require('express');
+const { dbConnection } = require('./database/config')
+
+
+
 var app = express();
 
+dbConnection();
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {
   res.json({
