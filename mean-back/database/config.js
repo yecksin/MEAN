@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 const dbConnection = async () => {
 
     try {
-        await mongoose.connect('mongodb+srv://yecksin:mixmega15@cluster-mean.9vyzt.mongodb.net/hospitaldb');
+        await mongoose.connect(process.env.DB_CNN);
         console.log("DB online")
     } catch (error) {
         console.log("Error al conectar la bd")
