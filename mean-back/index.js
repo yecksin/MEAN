@@ -1,6 +1,10 @@
-var express = require('express');
-const { dbConnection } = require('./database/config')
 require('dotenv').config();
+
+const express = require('express');
+const corst = require('cors')
+
+const { dbConnection } = require('./database/config')
+
 
 
 
@@ -10,6 +14,8 @@ dbConnection();
 
 console.log()
 
+//?config cors
+app.use( cors() )
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {
