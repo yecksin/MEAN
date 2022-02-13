@@ -17,6 +17,10 @@ console.log()
 //?config cors
 app.use( cors() )
 
+
+//? lectura y parseo del body //! el orden es importante
+app.use(express.json())
+
 // respond with "hello world" when a GET request is made to the homepage
 app.use('/api/usuarios', require('./routes/usuarios.route'));
 
