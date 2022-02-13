@@ -1,15 +1,16 @@
 const Usuario = require('../models/usuario.model')
 
-const getUsuarios = (req, res) => {
+const getUsuarios = async (req, res) => {
+  const usuarios = await Usuario.find();
+  // const usuarios = await Usuario.find({},'nombre');
+
   res.json({
     ok: true,
-    usuarios: []
+    usuarios
   })
 }
 
 const crearUsuario = async (req, res) => {
-  console.log(req.body)
-  const { email, password, nombre } = req.body;
   const usuario = new Usuario(req.body)
   await usuario.save();
   res.json({
