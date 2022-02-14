@@ -1,4 +1,6 @@
 const {response} = require('express');
+const bcrypt = require('bcryptjs');
+
 const Usuario = require('../models/usuario.model')
 
 const getUsuarios = async (req, res) => {
@@ -13,7 +15,7 @@ const getUsuarios = async (req, res) => {
 
 //? el response es para tener el tipado de response
 const crearUsuario = async (req, res = response) => {
-  const {email} = req.body;
+  const {email,password, nombre} = req.body;
 
   try {
 
@@ -25,7 +27,13 @@ const crearUsuario = async (req, res = response) => {
       })
     }
 
+
+
     const usuario = new Usuario(req.body)
+    //? escriptar contraseña
+    const salt = bcrypt.genSaltSync();
+    usuario.password = bcrypt.hashSync(password,salt);
+    //? guardar usuario
     await usuario.save();
     res.json({
       ok: true,
