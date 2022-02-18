@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const Usuario = require('../models/usuario.model');
 const { request } = require('express');
+const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
   const usuarios = await Usuario.find();
@@ -18,13 +19,16 @@ const getUsuarios = async (req, res) => {
 const crearUsuario = async (req, res = response) => {
   const {email,password, nombre} = req.body;
 
+
   try {
 
     const exissteEmail = await Usuario.findOne({email})
+    console.log(exissteEmail)
     if (exissteEmail) {
       return res.status(400).json({
         ok: true,
         message: `Correo ya existe`
+        
       })
     }
 
@@ -35,11 +39,18 @@ const crearUsuario = async (req, res = response) => {
     const salt = bcrypt.genSaltSync();
     usuario.password = bcrypt.hashSync(password,salt);
     //? guardar usuario
-    await usuario.save();
+    
+    
+    let userCreated = await usuario.save();
+    const token = await generarJWT(userCreated.id)
+    console.log(token)
+    usuario.token = token
     res.json({
       ok: true,
       message: `Usuario ${nombre} creado`,
-      usuario
+      usuario,
+      token
+      
     })
   } catch (error) {
     console.log(error);
