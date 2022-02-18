@@ -71,13 +71,11 @@ const actualizarUsuario = async  (req= request, res = response) => {
     }
 
     //? actualizaciones
-    const campos = req.body
+    const { password,google,email, ...campos} = req.body
     //? no actailizar lo mismo
-    if (usuarioDB.email === req.body.email) {
-      delete campos.email
-    } else {
+    if (usuarioDB.email !== email) {
       //? si el email ya existe
-      const existeEmail = await Usuario.findOne({email: req.body.email})
+      const existeEmail = await Usuario.findOne({email})
       if (existeEmail) {
         return     res.status(400).json({
           ok:false,
@@ -86,10 +84,7 @@ const actualizarUsuario = async  (req= request, res = response) => {
       }
     }
 
-
-    delete campos.password;
-    delete campos.google
-
+    campos.email = email;
     const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new:true}) //? new true es para que terorne el usuario actualizado no el viajo como está actualmente
 
 
@@ -107,7 +102,36 @@ const actualizarUsuario = async  (req= request, res = response) => {
   }
 }
 
+const borrarUsuario = async (req, res = response)=>{
+  console.log(req.params.id)
+  try {
+    
+    const usuarioDB = await Usuario.findById(req.params.id);
+    console.log(usuarioDB)
+    if (!usuarioDB) {
+        return res.status(404).json({
+          ok:false,
+          msg: 'No existe un usuario con ese id'
+        })
+    }
+
+    await Usuario.findByIdAndDelete(req.params.id)
+
+    console.log('##### Hola:  #####');
+    res.json({
+      ok:true,
+      uid: req.params.id
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok:false,
+      error
+    })
+  }
+}
+
 
 module.exports = {
-  getUsuarios, crearUsuario, actualizarUsuario
+  getUsuarios, crearUsuario, actualizarUsuario, borrarUsuario
 }
