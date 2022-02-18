@@ -8,7 +8,7 @@ const { generarJWT } = require('../helpers/jwt');
 const getUsuarios = async (req, res) => {
   const usuarios = await Usuario.find();
   // const usuarios = await Usuario.find({},'nombre');
-
+  console.log(req.tokenMsg)
   res.json({
     ok: true,
     usuarios
