@@ -23,7 +23,7 @@ app.use(express.json())
 
 // respond with "hello world" when a GET request is made to the homepage
 app.use('/api/usuarios', require('./routes/usuarios.route'));
-
+app.use('/api/login', require('./routes/auth.route'));
 
 app.listen(process.env.PORT,()=>{
     console.log(`Puerto corriendo en el ${process.env.PORT}`)
