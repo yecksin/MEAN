@@ -6,12 +6,24 @@ const { request } = require('express');
 const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
-  const usuarios = await Usuario.find();
-  // const usuarios = await Usuario.find({},'nombre');
+  // const usuarios = await Usuario.find();
+  const desde = Number(req.query.desde) || 0;
+  
+
+  //? para hacer dos promesas a la misma vez
+  const [usuarios, total] = await Promise.all([
+    Usuario.find({},'nombre').skip(desde).limit(5),
+    Usuario.count()
+  ]);
+
+  // const usuarios = await Usuario.find({},'nombre').skip(desde).limit(5);
+  // const total = await Usuario.count();
+
   console.log(req.tokenMsg)
   res.json({
     ok: true,
-    usuarios
+    usuarios,
+    total
   })
 }
 
