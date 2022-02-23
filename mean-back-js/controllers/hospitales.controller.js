@@ -2,10 +2,20 @@ const Hospital = require("../models/hospital.model")
 
 
 const getHospitales = async (req, res = response) => {
-    res.json({
-        ok: true,
-        message:'getHospitales'
-    })
+    const hospitales = await Hospital.find().populate('usuario','nombre email');
+    try {
+        res.json({
+            ok: true,
+            hospitales:hospitales
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            message:'error inesperado'
+        })
+    }
+
 }
 const crearHospital = async (req, res = response) => {
     const uid = req.uid;
