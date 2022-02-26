@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const { actualizarImagen } = require('../helpers/actualizar-imagen');
 
 const fileUpload = async (req, res = response) => {
 
@@ -41,13 +42,16 @@ const fileUpload = async (req, res = response) => {
     //generar el nombre del archivo
     const nombreArchivo = `${uuidv4()}.${extensionArchivo}`;
     //? path para guardar imagen
-    const patch = `./uploads/${tipo}/${nombreArchivo}`;
-    file.mv(patch, (err) => {
+    const path = `./uploads/${tipo}/${nombreArchivo}`;
+    file.mv(path, (err) => {
         if (err)
           return res.status(500).json({
             ok: true,
             message:'Error al mover la imagen'
         })
+
+        // Actualizar base de datos
+        actualizarImagen(tipo, id, nombreArchivo);
     
         res.json({
             ok: true,
@@ -56,18 +60,7 @@ const fileUpload = async (req, res = response) => {
         })
       });
 
-    //  try {
-    //      res.json({
-    //          ok: true,
-    //          nombreArchivo
-    //      })
-    //  } catch (error) {
-    //      console.log(error)
-    //      res.status(500).json({
-    //          ok: true,
-    //          message:'getBusqueda Error ines'
-    //      })
-    //  }
+
  
  }
  
