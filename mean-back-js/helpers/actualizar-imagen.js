@@ -50,7 +50,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo)=>{
             var pathViejo = `./uploads/medicos/${usuario.img}`
             borrarImagen(pathViejo);
             usuario.img = nombreArchivo;
-            await hospital.save();
+            await usuario.save();
             return true;
         }
 
