@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './components/navbar/navbar.module';
 import { BreadcrumbModule } from './components/breadcrumb/breadcrumb.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BreadcrumbModule } from './components/breadcrumb/breadcrumb.module';
     BrowserModule,
     AppRoutingModule,
     NavbarModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

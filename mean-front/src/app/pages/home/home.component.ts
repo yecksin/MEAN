@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TestService } from '../../services/test.service';
 declare const usarjsEnTs:Function;
 @Component({
   selector: 'app-home',
@@ -7,10 +8,15 @@ declare const usarjsEnTs:Function;
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _testService:TestService
+  ) { }
 
   ngOnInit(): void {
     usarjsEnTs(2,2);
+    this._testService.getUsers().subscribe(resp=>{
+      console.log(resp)
+    })
   }
 
 }
