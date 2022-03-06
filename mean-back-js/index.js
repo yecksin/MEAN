@@ -12,6 +12,10 @@ var app = express();
 
 dbConnection();
 
+//? servdir html
+
+app.use( express.static('public'))
+
 console.log()
 
 //?config cors
