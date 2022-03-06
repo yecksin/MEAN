@@ -24,6 +24,11 @@ export class UserClassComponent implements OnInit {
       console.log(resp)
      
     })
+
+    this._testService.getUsers2().subscribe((resp:{name:string,phone:string})=>{
+      console.log(resp)
+     
+    })
   }
 
 }
