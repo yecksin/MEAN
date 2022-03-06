@@ -20,7 +20,7 @@ export class UserClassComponent implements OnInit {
     this.user = new User('yecksin','2332345644','31683940538');
     this.user.imprimirUsuario();
    
-    this._testService.getUsers().subscribe(resp=>{
+    this._testService.getUsers().subscribe((resp:{name:string,phone:string})=>{
       console.log(resp)
      
     })

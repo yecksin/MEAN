@@ -2,6 +2,7 @@ const {response} = require('express');
 const Usuario = require('../models/usuario.model');
 const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
+const { getMenuFrontend } = require('../database/menu-frontend');
 
 const login = async (req, res = response) => {
 
@@ -38,7 +39,8 @@ const login = async (req, res = response) => {
 
         res.json({
             ok:true,
-            msg:token
+            msg:token,
+            menu: getMenuFrontend(usuarioDB.role)
           });
     } catch (error) {
         res.status(500).json({
