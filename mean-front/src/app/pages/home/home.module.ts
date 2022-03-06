@@ -7,6 +7,7 @@ import { CustomBarChartModule } from '../../components/custom-bar-chart/custom-b
 import { ThemeSelectorModule } from '../../components/theme-selector/theme-selector.module';
 import { PromesasModule } from '../../components/promesas/promesas.module';
 import { RxjsModule } from '../../components/rxjs/rxjs.module';
+import { UserClassModule } from '../../components/user-class/user-class.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RxjsModule } from '../../components/rxjs/rxjs.module';
     CustomBarChartModule,
     ThemeSelectorModule,
     PromesasModule,
-    RxjsModule
+    RxjsModule,
+    UserClassModule
   ]
 })
 export class HomeModule { }

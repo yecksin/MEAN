@@ -9,14 +9,11 @@ declare const usarjsEnTs:Function;
 export class HomeComponent implements OnInit {
 
   constructor(
-    private _testService:TestService
+
   ) { }
 
   ngOnInit(): void {
     usarjsEnTs(2,2);
-    this._testService.getUsers().subscribe(resp=>{
-      console.log(resp)
-    })
   }
 
 }
